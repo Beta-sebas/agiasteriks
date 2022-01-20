@@ -14,7 +14,25 @@ public class Prueba extends BaseAgiScript {
         // Answer the channel...
         answer();
         // ...say hello...
-        exec("Festival", "Hola desde el Script de Java");
+        exec("Festival", "Hola desde el Script de Java presione una tecla para ser leida " +
+                "o no haga nada, y se cuelga");
+        
+        String dato; 
+        boolean ban = true; 
+        while (ban) {
+         
+        dato = this.getData(null,20000L,2);
+            
+            if (dato.equals("45")) {
+                
+                ban=false;
+            }else{
+                System.out.print("El numero presionado fue" + dato);
+                exec("Festival", "la tecla que presionó fue " + dato);
+            }
+            //streamFile("tt-monkeys");
+        }
+        
         // ...and hangup.
         hangup();               
     }          
