@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 24-01-2022 a las 15:25:58
+-- Tiempo de generación: 24-01-2022 a las 20:37:34
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `facturas` (
 
 INSERT INTO `facturas` (`id`, `idUsuario`, `agua`, `energia`, `gas`, `internet`) VALUES
 (1, 1, 40000, 0, 40000, 0),
-(2, 4, 0, 50000, 10000, 0),
+(2, 4, 0, 5000, 70000, 45000),
 (3, 2, 0, 70000, 0, 60000),
 (4, 3, 0, 0, 0, 60000);
 
@@ -58,10 +58,10 @@ INSERT INTO `facturas` (`id`, `idUsuario`, `agua`, `energia`, `gas`, `internet`)
 DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE IF NOT EXISTS `servicios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) NOT NULL,
+  `nombre` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `costo` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
@@ -82,11 +82,11 @@ INSERT INTO `servicios` (`id`, `nombre`, `costo`) VALUES
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) NOT NULL,
-  `cedula` varchar(15) NOT NULL,
+  `nombre` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cedula` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `saldo` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `cedula`, `saldo`) VALUES
 (1, 'Andrés Felipe Coral Dávila', '111', 50000),
 (2, 'Juan Sebastian Betancourt', '222', 80000),
-(3, 'Isabela Lopez', '333', 10000),
-(4, 'Cristian Barreto', '444', 200000);
+(3, 'Isabela Lopez', '333', 100000),
+(4, 'Cristian Barreto', '444', 120000);
 
 --
 -- Restricciones para tablas volcadas
