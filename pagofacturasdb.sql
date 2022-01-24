@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 20, 2022 at 11:19 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 24-01-2022 a las 15:25:58
+-- Versión del servidor: 8.0.21
+-- Versión de PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,23 +18,53 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pagofacturasdb`
+-- Base de datos: `pagofacturasdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicios`
+-- Estructura de tabla para la tabla `facturas`
 --
 
-CREATE TABLE `servicios` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `facturas`;
+CREATE TABLE IF NOT EXISTS `facturas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idUsuario` int NOT NULL,
+  `agua` bigint NOT NULL,
+  `energia` bigint NOT NULL,
+  `gas` bigint NOT NULL,
+  `internet` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`id`, `idUsuario`, `agua`, `energia`, `gas`, `internet`) VALUES
+(1, 1, 40000, 0, 40000, 0),
+(2, 4, 0, 50000, 10000, 0),
+(3, 2, 0, 70000, 0, 60000),
+(4, 3, 0, 0, 0, 60000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+DROP TABLE IF EXISTS `servicios`;
+CREATE TABLE IF NOT EXISTS `servicios` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
-  `costo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `costo` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `servicios`
+-- Volcado de datos para la tabla `servicios`
 --
 
 INSERT INTO `servicios` (`id`, `nombre`, `costo`) VALUES
@@ -46,18 +76,20 @@ INSERT INTO `servicios` (`id`, `nombre`, `costo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
   `cedula` varchar(15) NOT NULL,
-  `saldo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `saldo` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `cedula`, `saldo`) VALUES
@@ -67,36 +99,14 @@ INSERT INTO `usuarios` (`id`, `nombre`, `cedula`, `saldo`) VALUES
 (4, 'Cristian Barreto', '444', 200000);
 
 --
--- Indexes for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Indexes for table `servicios`
+-- Filtros para la tabla `facturas`
 --
-ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `servicios`
---
-ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `facturas`
+  ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
